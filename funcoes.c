@@ -38,7 +38,7 @@ int get_date(char tipo) {
 //Retornar horas || minutos || segundos
 int get_time(char tipo) {
   struct tm *local, *gm;
-  time_t t;
+  time_t t = time(0);
   t = time(NULL);
   local = localtime(&t);
 
@@ -87,16 +87,16 @@ void mostrar_welcome_screen() {
 }
 
 void mostrar_assentos_normais() {
-  printf("----------------------------------------------------------------");
+  printf("Retornar á tela principal: 0 \n\n");
   char disponivel = ' ';
   printf("      ");
-  // for(int i = 0; i < CADEIRAS; i++) {
-  //   if(i < 9)
-  //     printf("-%d-  ", i+1);
-  //   else {
-  //     printf("-%d- ", i+1);
-  //   }
-  // }
+  for(int i = 0; i < CADEIRAS; i++) {
+    if(i < 9)
+      printf("-%d-  ", i+1);
+    else {
+      printf("-%d- ", i+1);
+    }
+  }
   printf("\n");
   for(int i = 4; i < FILEIRAS; i++) {
     for(int j = 0; j < CADEIRAS; j++) {
@@ -117,8 +117,7 @@ void mostrar_assentos_normais() {
 }
 
 void mostrar_assentos_convidados() {
-  //printf("----------------------------------------------------------------\n\n");
-  char disponivel = ' ';
+  printf("Retornar á tela principal: 0 \n\n");  char disponivel = ' ';
   printf("      ");
   for(int i = 0; i < CADEIRAS; i++) {
     if(i < 9)
@@ -148,16 +147,16 @@ void mostrar_assentos_convidados() {
 
 
 void mostrar_assentos_pne() {
-  printf("----------------------------------------------------------------");
+  printf("Retornar á tela principal: 0 \n\n");
   char disponivel = ' ';
   printf("      ");
-  // for(int i = 0; i < CADEIRAS; i++) {
-  //   if(i < 9)
-  //     printf("-%d-  ", i+1);
-  //   else {
-  //     printf("-%d- ", i+1);
-  //   }
-  // }
+  for(int i = 0; i < CADEIRAS; i++) {
+    if(i < 9)
+      printf("-%d-  ", i+1);
+    else {
+      printf("-%d- ", i+1);
+    }
+  }
   printf("\n");
   for(int i = 2; i < 4; i++) {
     for(int j = 0; j < CADEIRAS; j++) {
@@ -266,12 +265,12 @@ void escolher_assento(int tipo_de_ticket) {
   }
   do {
     do {
-      printf("Fileira Desejada: ");
+      printf("\nFileira Desejada: ");
       scanf("%d", &fileira_escolhida);
       if(fileira_escolhida == 0)
         return;
       if(fileira_escolhida < minimo_fileira || fileira_escolhida > max_fileira) {
-        printf("AVISO: A fileira escolhida não existe ou não é permitida para este tipo de ticket.\nPor favor, tente novamente!\n");
+        printf("\nAVISO: A fileira escolhida não existe ou não é permitida para este tipo de ticket.\nPor favor, tente novamente!\n");
         set_cursor(0);
         sleep(3);
         set_cursor(1);
@@ -322,11 +321,8 @@ int cadastrar_usuario() {
   //Tela de Inicio
   mostrar_welcome_screen();
   //Perguntado tipo de ticket enquanto ele for diferente de 9
-  limpar_tela();
-  escolher_tela(2);
-  escolher_tela(3);
-  escolher_tela(1);
   do {
+    limpar_tela();
     printf("\nNOVO TICKET\n\n");
     printf("Selecione o Tipo de Assento:\n\n");
     printf("1 - Assento Comum :\n");
